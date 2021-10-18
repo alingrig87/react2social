@@ -1,4 +1,4 @@
-# sociaLIN
+# react2social
 
 Social media project using React and Node JS
 
