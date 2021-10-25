@@ -1,6 +1,6 @@
 # react2social
 
-Social media project using React and Node JS
+Social media project backend part Node JS
 
 ### Install dependencies
 
