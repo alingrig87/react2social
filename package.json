@@ -1,5 +1,5 @@
 {
-	"name": "socialin",
+	"name": "react2social",
 	"version": "1.0.0",
 	"description": "Social Media app build with node.js and React",
 	"main": "server.js",
