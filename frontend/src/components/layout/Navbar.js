@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { AiFillHome } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 import { RiLoginCircleFill } from 'react-icons/ri';
 import { ImEnter } from 'react-icons/im';
+import Spinner from './Spinner';
+
+const Posts = (props) => {
+	return (
+		<div className="container">
+			{props.posts.map((post) => (
+				<div key={post._id}>
+					<h4>{post.name}</h4>
+					<p>{post.text}</p>
+				</div>
+			))}
+		</div>
+	);
+};
 
 const Navbar = (props) => {
-	let posts = fetch('/api/posts')
-		.then((res) => res.json())
-		.then((data) => console.log(data));
+	const [loading, setLoading] = useState(true);
+	const [posts, setPosts] = useState([]);
+
+	useEffect(() => {
+		axios.get('/api/posts').then((response) => {
+			setPosts(response.data);
+		});
+	}, []);
+
+	console.log(posts);
+
 	return (
 		<div>
 			<nav className="navbar bg-primary">
@@ -32,6 +55,15 @@ const Navbar = (props) => {
 					</li>
 				</ul>
 			</nav>
+			<div className="container">
+				<button
+					className="btn btn-dark my-3"
+					onClick={() => setLoading(!loading)}
+				>
+					Get Posts
+				</button>
+			</div>
+			{loading ? <Spinner /> : <Posts posts={posts} />}
 		</div>
 	);
 };
